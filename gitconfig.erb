@@ -9,7 +9,7 @@
 	branch = auto
 [core]
 	excludesfile = <%= ENV['HOME'] %>/.gitignore
-	editor = mvim
+	editor = <%= print("Preferred git editor (vim?): "); STDOUT.flush; STDIN.gets.chomp %>
 	autocrlf = input
 [apply]
 	whitespace = nowarn
