@@ -9,6 +9,13 @@ Bates' dotfiles, with the nice Rakefile and stuff.
   cd ~/.dotfiles
   rake install
 
+== About screen... :/
+
+Yes, you have to use GNU screen. And yes, you have to use recompile it to enable
+256 color support :) Follow this guide to do so:
+
+  http://www.robmeerman.co.uk/unix/256colours
+
 == Looking for our vimfiles as well?
 
   git clone http://github.com/codegram/vimfiles.git ~/.vim
