@@ -1,0 +1,193 @@
+# For a complete list of available commands, see http://bit.ly/jLtj
+
+# Set the leader key to `
+escape ``
+
+# Message to display in the status line when activity is detected in a
+# monitored window.
+activity              "activity in %n (%t) [%w:%s]~"
+
+# Detach session on hangup instead of terminating screen completely.
+autodetach            on              # default: on
+
+# don't display the copyright page
+startup_message off
+
+# When a bell character is sent to a background window, screen displays a
+# notification in the message line. The notification message can be re-defined
+# by this command.
+bell_msg              "bell     in %n (%t) [%w:%s]~"
+
+# This command controls the display of the window captions. Normally a caption
+# is only used if more than one window is shown on the display.
+#caption               always          "%{= kw}%?%-Lw%?%{+b kw}%n*%t%f %?(%u)%?%{= kw}%?%+Lw%?"
+
+# Select line break behavior for copying.
+crlf                  off             # default: off
+
+# Select default utmp logging behavior.
+#deflogin              off             # default: on
+
+# Set default lines of scrollback.
+defscrollback         3000            # default: 100
+
+# If set to 'on', screen will append to the 'hardcopy.n' files created by the
+# command hardcopy; otherwise, these files are overwritten each time.
+hardcopy_append       on              # default: off
+
+# This command configures the use and emulation of the terminal's hardstatus
+# line. The type 'lastline' will reserve the last line of the display for the
+# hardstatus. Prepending the word 'always' will force screen to use the type
+# even if the terminal supports a hardstatus line.
+altscreen on
+term screen-256color
+bind ',' prev
+bind '.' next
+
+#change the hardstatus settings to give an window list at the bottom of the
+#screen, with the time and date and with the current window highlighted
+hardstatus alwayslastline
+#hardstatus string '%{= kG}%-Lw%{= kW}%50> %n%f* %t%{= kG}%+Lw%< %{= kG}%-=%c:%s%{-}'
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W}%c %{g}]'
+#hardstatus alwayslastline '%{= kG}[ %{y}%H %{g}][%15= %>%-Lw%40>%{r}(%{W}%n*%f %t%?(%u)%?%{r})%{g}%+Lw%-22< ][%{c} %Y-%m-%d %c %{g}]'
+# 
+#hardstatus            alwayslastline  "%{+b kr}[ %H ] %{ky} Load: %l %-=%{kb} %c  %Y.%m.%d"
+msgwait               15
+
+# Set message displayed on pow_detach (when HUP is sent to screen's parent
+# process).
+pow_detach_msg        "BYE"
+
+# Set the default program for new windows.
+shell                 zsh
+
+# Default timeout to trigger an inactivity notify.
+silencewait           20              # default: 30
+
+# Change text highlighting. See http://bit.ly/11RDGZ
+sorendition           gK
+
+# Do NOT display copyright notice on startup.
+startup_message       off             # default: on
+
+# Set $TERM for new windows. I have more luck with 'linux' than Terminal's
+# default 'xterm-color' (^H problems). Comment out to use the default.
+#term                  linux
+
+# Tweak termcap, terminfo, and termcapinfo  entries for best performance.
+# termcap               linux           'AF=\\E[3%dm:AB=\\E[4%dm'
+# termcap               xterm-color     'AF=\\E[3%dm:AB=\\E[4%dm'
+# terminfo              linux           'AF=\\E[3%p1%dm:AB=\\E[4%p1%dm'
+# terminfo              xterm-color     'AF=\\E[3%p1%dm:AB=\\E[4%p1%dm'
+
+# Allow xterm / Terminal scrollbars to access the scrollback buffer. This
+# enables the behavior you'd expect, instead of losing the content that scrolls
+# out of the window.
+termcapinfo           linux           ti@:te@
+termcapinfo           xterm-color     ti@:te@
+termcapinfo           xterm-256color     ti@:te@
+
+################
+#
+# xterm tweaks
+#
+
+#xterm understands both im/ic and doesn't have a status line.
+#Note: Do not specify im and ic in the real termcap/info file as
+#some programs (e.g. vi) will not work anymore.
+termcap  xterm hs@:cs=\E[%i%d;%dr:im=\E[4h:ei=\E[4l
+terminfo xterm hs@:cs=\E[%i%p1%d;%p2%dr:im=\E[4h:ei=\E[4l
+
+#80/132 column switching must be enabled for ^AW to work
+#change init sequence to not switch width
+termcapinfo  xterm Z0=\E[?3h:Z1=\E[?3l:is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l
+
+# Make the output buffer large for (fast) xterms.
+#termcapinfo xterm* OL=10000
+termcapinfo xterm* OL=100
+
+# tell screen that xterm can switch to dark background and has function
+# keys.
+termcapinfo xterm 'VR=\E[?5h:VN=\E[?5l'
+termcapinfo xterm 'k1=\E[11~:k2=\E[12~:k3=\E[13~:k4=\E[14~'
+termcapinfo xterm 'kh=\EOH:kI=\E[2~:kD=\E[3~:kH=\EOF:kP=\E[5~:kN=\E[6~'
+
+# special xterm hardstatus: use the window title.
+termcapinfo xterm 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'
+
+#terminfo xterm 'vb=\E[?5h$<200/>\E[?5l'
+termcapinfo xterm 'vi=\E[?25l:ve=\E[34h\E[?25h:vs=\E[34l'
+
+# emulate part of the 'K' charset
+termcapinfo   xterm 'XC=K%,%\E(B,[\304,\\\\\326,]\334,{\344,|\366,}\374,~\337'
+
+# xterm-52 tweaks:
+# - uses background color for delete operations
+termcapinfo xterm* be
+
+
+
+# Use visual bell instead of audio bell.
+vbell                 on              # default: ???
+
+# Message to be displayed when the visual bell is triggered.
+vbell_msg             " *beep* "
+
+#terminfo and termcap for nice 256 color terminal
+## allow bold colors - necessary for some reason
+attrcolor b ".I"
+## tell screen how to set colors. AB = background, AF=foreground
+termcapinfo xterm "Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm"
+termcapinfo xterm-color "Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm"
+termcapinfo xterm-256color "Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm"
+## erase background with current bg color
+defbce "on"]]"]]"
+
+
+################
+#
+# keybindings
+#
+
+#remove some stupid / dangerous key bindings
+bind k
+bind ^k
+bind .
+bind ^\
+bind \\
+bind ^h
+bind h
+#make them better
+bind 'K' kill
+bind 'I' login on
+bind 'O' login off
+bind '}' history
+
+# Yet another hack:
+# Prepend/append register [/] to the paste if ^a^] is pressed.
+# This lets me have autoindent mode in vi.
+register [ "\033:se noai\015a"
+register ] "\033:se ai\015a"
+bind ^] paste [.]
+
+################
+#
+# default windows
+#
+
+# screen -t local 0
+# screen -t mail 1 mutt
+# screen -t 40 2 rlogin server
+
+# caption always "%3n %t%? @%u%?%? [%h]%?%=%c"
+# hardstatus alwaysignore
+# hardstatus alwayslastline "%Lw"
+
+# bind = resize =
+# bind + resize +1
+# bind - resize -1
+# bind _ resize max
+#
+# defnonblock 1
+# blankerprg rain -d 100
+# idle 30 blanker

@@ -1,0 +1,12 @@
+= Codegram dotfiles
+
+These are the dotfiles we use at Codegram! The repo is heavily inspired on Ryan
+Bates' dotfiles, with the nice Rakefile and stuff.
+
+== Installation
+
+  git clone git://github.com/codegram/dotfiles ~/.dotfiles
+  cd ~/.dotfiles
+  rake install
+
+Have fun! :)
