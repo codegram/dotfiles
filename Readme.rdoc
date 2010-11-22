@@ -9,4 +9,14 @@ Bates' dotfiles, with the nice Rakefile and stuff.
   cd ~/.dotfiles
   rake install
 
+== Looking for our vimfiles as well?
+
+  git clone http://github.com/codegram/vimfiles.git ~/.vim
+  sh ~/.vim/install.sh
+
+Read about our vim configuration, custom mappings and plugins on the repo
+readme!
+
+  http://github.com/codegram/vimfiles
+
 Have fun! :)
