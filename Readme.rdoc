@@ -16,6 +16,10 @@ Yes, you have to use GNU screen. And yes, you have to use recompile it to enable
 
   http://www.robmeerman.co.uk/unix/256colours
 
+Use this cheatsheet if you don't know screen:
+
+  http://arundelo.livejournal.com/390.html
+
 == Looking for our vimfiles as well?
 
   git clone http://github.com/codegram/vimfiles.git ~/.vim

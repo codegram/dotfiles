@@ -152,7 +152,6 @@ defbce "on"]]"]]"
 #remove some stupid / dangerous key bindings
 bind k
 bind ^k
-bind .
 bind ^\
 bind \\
 bind ^h
