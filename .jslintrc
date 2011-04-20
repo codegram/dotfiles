@@ -1,0 +1,3 @@
+/*jslint white: true, forin: true, onevar: true, undef: true, eqeqeq: true, bitwise: true, immed: true, indent: 2, maxlen: 120 */
+/*global jQuery, $, module, require, GLOBAL, __dirname, console, Buffer, process, exports, JSON */
+/* vim: set ft=javascript: */
