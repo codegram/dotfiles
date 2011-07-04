@@ -114,7 +114,7 @@ extend_console 'pm', true, false do
     end
     max_name = data.collect {|item| item[0].size}.max
     max_args = data.collect {|item| item[1].size}.max
-    data.each do |item| 
+    data.each do |item|
       print " #{ANSI[:YELLOW]}#{item[0].to_s.rjust(max_name)}#{ANSI[:RESET]}"
       print "#{ANSI[:BLUE]}#{item[1].ljust(max_args)}#{ANSI[:RESET]}"
       print "   #{ANSI[:GRAY]}#{item[2]}#{ANSI[:RESET]}\n"
@@ -125,6 +125,10 @@ end
 
 extend_console 'interactive_editor' do
   # no configuration needed
+end
+
+extend_console 'blueprints', (defined?(Rails) && !Rails.env.production? && File.exists?(Rails.root + 'test/blueprints.rb')), false do
+  require Rails.root + 'test/blueprints'
 end
 
 # Show results of all extension-loading
