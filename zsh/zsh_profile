@@ -1,0 +1,9 @@
+
+# Load the zsh functions to make the prompt aware of minutes since last commit.
+fpath=($fpath $HOME/.dotfiles/zsh/func)
+typeset -U path
+
+setopt promptsubst
+autoload -U promptinit
+promptinit
+prompt grb

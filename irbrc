@@ -26,14 +26,14 @@ ANSI[:CYAN]      = "\e[36m"
 ANSI[:WHITE]     = "\e[37m"
 
 # Build a simple colorful IRB prompt
-IRB.conf[:PROMPT][:SIMPLE_COLOR] = {
-  :PROMPT_I => "#{ANSI[:BLUE]}>>#{ANSI[:RESET]} ",
-  :PROMPT_N => "#{ANSI[:BLUE]}>>#{ANSI[:RESET]} ",
-  :PROMPT_C => "#{ANSI[:RED]}?>#{ANSI[:RESET]} ",
-  :PROMPT_S => "#{ANSI[:YELLOW]}?>#{ANSI[:RESET]} ",
-  :RETURN   => "#{ANSI[:GREEN]}=>#{ANSI[:RESET]} %s\n",
-  :AUTO_INDENT => true }
-IRB.conf[:PROMPT_MODE] = :SIMPLE_COLOR
+# IRB.conf[:PROMPT][:SIMPLE_COLOR] = {
+#   :PROMPT_I => "#{ANSI[:BLUE]}>>#{ANSI[:RESET]} ",
+#   :PROMPT_N => "#{ANSI[:BLUE]}>>#{ANSI[:RESET]} ",
+#   :PROMPT_C => "#{ANSI[:RED]}?>#{ANSI[:RESET]} ",
+#   :PROMPT_S => "#{ANSI[:YELLOW]}?>#{ANSI[:RESET]} ",
+#   :RETURN   => "#{ANSI[:GREEN]}=>#{ANSI[:RESET]} %s\\n",
+#   :AUTO_INDENT => true }
+# IRB.conf[:PROMPT_MODE] = :SIMPLE_COLOR
 
 # Loading extensions of the console. This is wrapped
 # because some might not be included in your Gemfile
