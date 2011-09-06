@@ -1,0 +1,45 @@
+# PostgreSQL
+alias start_postgres="launchctl load -w ~/Library/LaunchAgents/org.postgresql.postgres.plist"
+alias stop_postgres="launchctl unload -w ~/Library/LaunchAgents/org.postgresql.postgres.plist"
+
+# MySQL
+alias start_mysql="launchctl load -w ~/Library/LaunchAgents/com.mysql.mysqld.plist"
+alias stop_mysql="launchctl unload -w ~/Library/LaunchAgents/com.mysql.mysqld.plist"
+
+# Git
+alias g="git status"
+alias ga="git add"
+alias gaa="git add --all"
+alias gc="git commit -m"
+alias gca="git commit -am"
+alias gb="git branch"
+alias gba="git branch -a"
+alias gbd="git branch -d"
+alias gco="git checkout"
+alias gcob="git checkout -b"
+alias gf="git fetch"
+alias gm="git merge"
+alias gr="git rebase"
+alias gl="git log"
+alias gs="git show"
+alias gd="git diff"
+alias gbl="git blame"
+alias gps="git push"
+alias gpl="git pull"
+
+# TMUX
+alias t="tmux"
+alias ta="tmux attach"
+alias tls="tmux list-sessions"
+alias tk="tmux kill-server"
+
+# Ruby
+alias r="ruby"
+alias i="pry --simple-prompt"
+alias b="bundle"
+alias be="bundle exec"
+alias bi="bundle install"
+alias bu="bundle update"
+
+# Rails console
+alias sc="pry --simple-prompt -r config/environment"
