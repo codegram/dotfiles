@@ -2,3 +2,7 @@
 wiki() {
   dig +short txt $1.wp.dg.cx
 }
+
+rvm_gem_install() {
+  for x in $(rvm list strings); do rvm use $x@global && gem install $1 $2; done
+}
