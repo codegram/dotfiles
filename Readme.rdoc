@@ -9,6 +9,14 @@ Bates' dotfiles, with the nice Rakefile and stuff.
   cd ~/.dotfiles
   rake install
 
+== Using your own config along
+
+These dotfiles require this file:
+
+  ~/.zshrc.local
+
+Here you can add your own mapping without risking to lose them when updating the repo :)
+
 == About screen... :/
 
 Yes, you have to use GNU screen. And yes, you have to use recompile it to enable
