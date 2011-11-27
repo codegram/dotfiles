@@ -12,3 +12,7 @@ profile() {
     RUBYOPT="-r`gem which perftools | tail -1`" \
     $1 $2 $3 $4 $5 && env ruby -S pprof.rb --gif /tmp/my_app_profile > profile.gif && open profile.gif
 }
+
+dns_zone_transfer() {
+  dig @$(host $1 | grep '[0-9]' | awk '{print $4}') $1 -t AXFR
+}
