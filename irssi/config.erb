@@ -1,5 +1,6 @@
-<% print("Your grove.io organization name: "); STDOUT.flush; $org = STDIN.gets.chomp %>
-<% print("Your grove.io organization password: "); STDOUT.flush; $orgpass = STDIN.gets.chomp %>
+<% print("Your organization name: "); STDOUT.flush; $org = STDIN.gets.chomp %>
+<% print("Your organization IRC server hostname: "); STDOUT.flush; $domain = STDIN.gets.chomp %>
+<% print("Your organization password: "); STDOUT.flush; $orgpass = STDIN.gets.chomp %>
 servers = (
 {
   address = "irc.freenode.org";
@@ -7,7 +8,7 @@ servers = (
   autoconnect = "yes";
 },
 {
-  address = "<%=$org%>.irc.grove.io";
+  address = "<%=$domain%>";
   chatnet = "<%=$org%>";
   autoconnect = "yes";
   password = "<%=$orgpass%>";
@@ -43,13 +44,12 @@ chatnets = {
 
   <%=$org%> = {
     type = "IRC";
-    autosendcmd = "/msg nickserv identify <%= print("Password for #{$nick} at #{$org} grove.io IRC: "); STDOUT.flush; STDIN.gets.chomp %>";
   };
 };
 
 channels = (
   { name = "#rubinius"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#<%=$org%>"; chatnet = "<%=$org%>"; autojoin = "no"; },
+  { name = "#<%=$org%>"; chatnet = "<%=$org%>"; autojoin = "yes"; },
 );
 
 hilights = (
