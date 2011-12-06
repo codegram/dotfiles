@@ -1,16 +1,8 @@
-<% print("Your grove.io organization name: "); STDOUT.flush; $org = STDIN.gets.chomp %>
-<% print("Your grove.io organization password: "); STDOUT.flush; $orgpass = STDIN.gets.chomp %>
 servers = (
 {
   address = "irc.freenode.org";
   chatnet = "freenode";
   autoconnect = "yes";
-},
-{
-  address = "<%=$org%>.irc.grove.io";
-  chatnet = "<%=$org%>";
-  autoconnect = "yes";
-  password = "<%=$orgpass%>";
 }
 );
 <% print("Your nickname: "); STDOUT.flush; $nick = STDIN.gets.chomp %>
@@ -43,13 +35,11 @@ chatnets = {
 
   <%=$org%> = {
     type = "IRC";
-    autosendcmd = "/msg nickserv identify <%= print("Password for #{$nick} at #{$org} grove.io IRC: "); STDOUT.flush; STDIN.gets.chomp %>";
   };
 };
 
 channels = (
-  { name = "#rubinius"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#<%=$org%>"; chatnet = "<%=$org%>"; autojoin = "no"; },
+  { name = "#rubinius"; chatnet = "freenode"; autojoin = "yes"; }
 );
 
 hilights = (
@@ -177,24 +167,14 @@ windows = {
       {
         type = "CHANNEL";
         chat_type = "IRC";
-        name = "#codegram";
-        tag = "codegram";
-      }
-    );
-  };
-  3 = {
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
         name = "#rubinius";
         tag = "freenode";
       }
     );
   };
-  4 = { name = "hilight"; sticky = "yes"; };
+  3 = { name = "hilight"; sticky = "yes"; };
 };
 mainwindows = {
   2 = { first_line = "8"; lines = "37"; };
-  4 = { first_line = "1"; lines = "7"; };
+  3 = { first_line = "1"; lines = "7"; };
 };
