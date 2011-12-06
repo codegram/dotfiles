@@ -40,3 +40,6 @@ BWHITE='\e[47m'
 
 # Use vi-like bindings instead of emac ones
 bindkey -v
+
+# Use ^R for incremental search
+bindkey '^R'    history-incremental-search-backward

@@ -6,3 +6,9 @@ wiki() {
 rvm_gem_install() {
   for x in $(rvm list strings); do rvm use $x@global && gem install $1 $2; done
 }
+
+profile() {
+  CPUPROFILE=/tmp/my_app_profile \
+    RUBYOPT="-r`gem which perftools | tail -1`" \
+    $1 $2 $3 $4 $5 && env ruby -S pprof.rb --gif /tmp/my_app_profile > profile.gif && open profile.gif
+}
