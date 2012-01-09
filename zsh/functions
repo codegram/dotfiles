@@ -16,3 +16,7 @@ profile() {
 dns_zone_transfer() {
   dig @$(host $1 | grep '[0-9]' | awk '{print $4}') $1 -t AXFR
 }
+
+use_local_rbx() {
+  export PATH=$HOME/Code/rubinius/bin:$PATH
+}
