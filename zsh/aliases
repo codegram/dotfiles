@@ -40,6 +40,7 @@ alias b="bundle"
 alias be="bundle exec"
 alias bi="bundle install"
 alias bu="bundle update"
+alias git=hub
 
 # Rails console
 alias sc="pry --simple-prompt -r config/environment"
