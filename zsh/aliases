@@ -40,8 +40,10 @@ alias b="bundle"
 alias be="bundle exec"
 alias bi="bundle install"
 alias bu="bundle update"
+alias git=hub
 
 # Rails console
 alias sc="pry --simple-prompt -r config/environment"
 
 alias reinstall_rbx="rvm remove rbx && rvm use 1.8.7 && rvm install rbx"
+alias vi=vim

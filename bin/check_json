@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'json'
+
+p JSON.parse(File.read(ARGV[0]))

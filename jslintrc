@@ -1,3 +1,3 @@
-/*jslint white: true, onevar: true, undef: true, nomen: true, regexp: true, plusplus: true, bitwise: true, node: true, maxerr: 50, indent: 2 */
-/*global jQuery, $, module, require, GLOBAL, __dirname, console, Buffer, process, exports, JSON */
+/*jslint white: true, onevar: true, undef: true, nomen: false, regexp: true, plusplus: true, bitwise: true, devel: true, node: true, maxerr: 50, indent: 2 */
+/*global jQuery, $, _, Backbone, window, module, require, GLOBAL, console, Buffer, process, exports, JSON */
 /* vim: set ft=javascript: */
