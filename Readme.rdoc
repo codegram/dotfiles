@@ -17,16 +17,16 @@ These dotfiles require this file:
 
 Here you can add your own mapping without risking to lose them when updating the repo :)
 
-== About screen... :/
+== Tmux
 
-Yes, you have to use GNU screen. And yes, you have to use recompile it to enable
-256 color support :) Follow this guide to do so:
+Go to your project directory and type this:
 
-  http://www.robmeerman.co.uk/unix/256colours
+  $ t
 
-Use this cheatsheet if you don't know screen:
+Keys to move around tmux:
 
-  http://arundelo.livejournal.com/390.html
+  * `\`o` (backtick and the letter o): Switch the current pane (split).
+  * `\`k`: Kill the current window.
 
 == Looking for our vimfiles as well?
 

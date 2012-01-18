@@ -28,10 +28,10 @@ alias gps="git push"
 alias gpl="git pull"
 
 # TMUX
-alias t="tmux"
 alias ta="tmux attach"
 alias tls="tmux list-sessions"
 alias tk="tmux kill-server"
+alias t="tmux start && TERM=screen-256color-bce tmux attach"
 
 # Ruby
 alias r="ruby"
