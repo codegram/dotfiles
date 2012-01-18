@@ -27,6 +27,8 @@ Keys to move around tmux:
 
   * `\`o` (backtick and the letter o): Switch the current pane (split).
   * `\`k`: Kill the current window.
+  * `\`c`: Create a new window (tab).
+  * `\`n`: Switch windows (tabs).
 
 == Looking for our vimfiles as well?
 
