@@ -47,3 +47,4 @@ alias sc="pry --simple-prompt -r config/environment"
 
 alias reinstall_rbx="rvm remove rbx && rvm use 1.8.7 && rvm install rbx"
 alias vi=vim
+alias gss="git status -sb"
