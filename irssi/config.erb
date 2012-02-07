@@ -32,14 +32,11 @@ chatnets = {
     type = "IRC";
     autosendcmd = "/msg nickserv identify <%= print("Your freenode password: "); STDOUT.flush; STDIN.gets.chomp %>";
   };
-
-  <%=$org%> = {
-    type = "IRC";
-  };
 };
 
 channels = (
-  { name = "#rubinius"; chatnet = "freenode"; autojoin = "yes"; }
+  { name = "#rubinius"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#codegram"; chatnet = "freenode"; autojoin = "yes"; password = "<%= print("Your #codegram password: "); STDOUT.flush; STDIN.gets.chomp %>"; }
 );
 
 hilights = (
@@ -167,7 +164,7 @@ windows = {
       {
         type = "CHANNEL";
         chat_type = "IRC";
-        name = "#rubinius";
+        name = "#codegram";
         tag = "freenode";
       }
     );
