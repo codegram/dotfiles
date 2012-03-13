@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e
+
+/usr/local/bin/ctags -R --languages=ruby --exclude=spec,test,features . `rvm gemdir`/gems
