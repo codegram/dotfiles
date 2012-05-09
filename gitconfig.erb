@@ -2,11 +2,18 @@
 	name = <%= print("Your Name: "); STDOUT.flush; STDIN.gets.chomp %>
 	email = <%= print("Your Email: "); STDOUT.flush; STDIN.gets.chomp %>
 [alias]
-	co = checkout
+  co = checkout
+  l = "!source ~/.githelpers && pretty_git_log"
+  la = !git l --all
+  r = !git l -30
+  ra = !git r --all
 [color]
-	diff = auto
-	status = auto
-	branch = auto
+  diff = auto
+  status = auto
+  branch = auto
+  ui = auto
+[merge]
+  tool = vimdiff
 [core]
 	excludesfile = <%= ENV['HOME'] %>/.gitignore
 	editor = <%= print("Preferred git editor (vim?): "); STDOUT.flush; STDIN.gets.chomp %>
