@@ -1,0 +1,44 @@
+#!/bin/bash
+set -e
+shopt -s globstar
+
+# Public: Resolves files to be run by the test runner.
+#
+# path - Can be either a test file, or a directory that contains tests at any
+#        depth.
+#
+# Returns a glob expression.
+resolve_files ()
+{
+  if [[ $1 =~ .rb$ ]] ; then
+    # if provided a file ending in .rb execute a single test
+    echo $1
+  elif [[ -n "$1" ]] ; then
+    # if provided any other argument execute all tests under one folder
+    for file in $1/**/*_test.rb
+    do
+      echo " -r./$file"
+    done
+  else
+    # run all tests by default
+    for file in test/**/*_test.rb
+    do
+      echo " -r./$file"
+    done
+  fi
+}
+
+# Handle -h argument and show usage banner
+while getopts :h o
+do
+  case "$o" in
+  h)  echo "Usage: $0 file_or_path"
+    exit 1;
+  esac
+done
+
+# Run the tests!
+path=$(resolve_files $1)
+
+echo $path
+env ruby -e\"nil\" -Ilib:test -rminitest/autorun $path
