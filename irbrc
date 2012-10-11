@@ -131,5 +131,15 @@ extend_console 'blueprints', (defined?(Rails) && !Rails.env.production? && File.
   require Rails.root + 'test/blueprints'
 end
 
+# Load railsrc file
+railsrc_path = File.expand_path('~/.railsrc')
+if ( ENV['RAILS_ENV'] || defined? Rails ) && File.exist?( railsrc_path )
+  begin
+    load railsrc_path
+  rescue Exception
+    warn "Could not load: #{ railsrc_path } because of #{$!.message}"
+  end
+end
+
 # Show results of all extension-loading
 puts "#{ANSI[:GRAY]}~> Console extensions:#{ANSI[:RESET]} #{$console_extensions.join(' ')}#{ANSI[:RESET]}"
