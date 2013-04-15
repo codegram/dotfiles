@@ -41,4 +41,4 @@ done
 path=$(resolve_files $1)
 
 echo $path
-env ruby -e\"nil\" -Ilib:test -rminitest/autorun $path
+ruby -e\"nil\" -Ilib:test -rminitest/autorun $path

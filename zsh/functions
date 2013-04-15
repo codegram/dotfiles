@@ -3,10 +3,6 @@ wiki() {
   dig +short txt $1.wp.dg.cx
 }
 
-rvm_gem_install() {
-  for x in $(rvm list strings); do rvm use $x@global && gem install $1 $2; done
-}
-
 profile() {
   CPUPROFILE=/tmp/my_app_profile \
     RUBYOPT="-r`gem which perftools | tail -1`" \
@@ -17,6 +13,10 @@ dns_zone_transfer() {
   dig @$(host $1 | grep '[0-9]' | awk '{print $4}') $1 -t AXFR
 }
 
-use_local_rbx() {
-  export PATH=$HOME/Code/rubinius/bin:$PATH
+external_ip() {
+  curl -s http://checkip.dyndns.org | sed 's/[a-zA-Z/<> :]//g'
+}
+
+prune_branches() {
+  git branch --merged master | grep -v 'master$' | xargs git branch -d
 }

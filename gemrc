@@ -1,7 +1,7 @@
 ---
 :verbose: true
-gem: --no-ri
-rdoc: -f hanna
+:sources:
+- http://rubygems.org/
 :update_sources: true
 :sources:
 - http://rubygems.org/

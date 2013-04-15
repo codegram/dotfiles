@@ -9,6 +9,9 @@ class Object
   def local_methods
     (methods - Object.instance_methods).sort
   end
+  def do(&block)
+    block.call self
+  end
 end
 
 ANSI = {}

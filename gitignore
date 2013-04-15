@@ -4,3 +4,12 @@
 .*.swp
 .rbx
 tags
+*.pdf
+.powenv
+.powrc
+.rvmrc.local
+*.json.erb
+h.rb
+.ruby-version
+.bundle
+run_tests.sh

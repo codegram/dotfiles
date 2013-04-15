@@ -31,7 +31,7 @@ alias gpl="git pull"
 alias ta="tmux attach"
 alias tls="tmux list-sessions"
 alias tk="tmux kill-server"
-alias t="tmux start && TERM=screen-256color-bce tmux attach"
+# alias t="tmux start && TERM=screen-256color-bce tmux attach"
 
 # Ruby
 alias r="ruby"
@@ -45,6 +45,5 @@ alias git=hub
 # Rails console
 alias sc="pry --simple-prompt -r config/environment"
 
-alias reinstall_rbx="rvm remove rbx && rvm use 1.8.7 && rvm install rbx"
 alias vi=vim
 alias gss="git status -sb"
