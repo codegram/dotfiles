@@ -26,44 +26,108 @@ include ApplicationController._helpers # Your own helpers
 #  (and which don't break anything), e.g.
 include ActionView::Helpers::DebugHelper
 include ActionView::Helpers::NumberHelper
-include ActionView::Helpers::RawOutputHelper
 include ActionView::Helpers::SanitizeHelper
 include ActionView::Helpers::TagHelper
 include ActionView::Helpers::TextHelper
 include ActionView::Helpers::TranslationHelper
 
-# # #
-# route list view helpers (requires hirb)
+if defined?(Hirb)
+  # # #
+  # route list view helpers (requires hirb)
 
-# hirb view for a route
-class Hirb::Helpers::Route < Hirb::Helpers::AutoTable
-  def self.render(output, options = {})
-    super( output.requirements.map{ |k,v|
-      [k, v.inspect]
-    }, options.merge({
-      :headers     => [output.name || '', "#{ output.verb || 'ANY' } #{ output.path }"],
-      :unicode     => true,
-      :description => nil,
-    }) )
+  # hirb view for a route
+  class Hirb::Helpers::Route < Hirb::Helpers::AutoTable
+    def self.render(output, options = {})
+      super( output.requirements.map{ |k,v|
+        [k, v.inspect]
+      }, options.merge({
+        :headers     => [output.name || '', "#{ output.verb || 'ANY' } #{ output.path }"],
+        :unicode     => true,
+        :description => nil,
+      }) )
+    end
   end
-end
-Hirb.add_view ActionDispatch::Routing::Route, :class => Hirb::Helpers::Route
+  Hirb.add_view ActionDispatch::Routing::Route, :class => Hirb::Helpers::Route
 
-# short and long route list
-def routes(long_output = false)
-  if long_output
-    Rails.application.routes.routes.each{ |e|
-      puts Hirb::Helpers::Route.render(e)
-    }
-    true
-  else
-    Hirb::Console.render_output Rails.application.routes.routes.map{|e|
-      [e.name || '', e.verb || 'ANY', e.path]
-    },{
-      :class   => Hirb::Helpers::AutoTable,
-      :headers => %w<name verb path>,
-    }
+  # short and long route list
+  def routes(long_output = false)
+    if long_output
+      Rails.application.routes.routes.each{ |e|
+        puts Hirb::Helpers::Route.render(e)
+      }
+      true
+    else
+      Hirb::Console.render_output Rails.application.routes.routes.map{|e|
+        [e.name || '', e.verb || 'ANY', e.path]
+      },{
+        :class   => Hirb::Helpers::AutoTable,
+        :headers => %w<name verb path>,
+      }
+    end
   end
+
+  # # #
+  # misc db helpers (requires hirb)
+  module DatabaseHelpers
+    extend self
+
+    def tables
+      Hirb::Console.render_output ActiveRecord::Base.connection.tables.map{|e|[e]},{
+        :class   => Hirb::Helpers::AutoTable,
+        :headers => %w<tables>,
+      }
+      true
+    end
+
+    def table(which)
+      Hirb::Console.render_output ActiveRecord::Base.connection.columns(which).map{ |e|
+        [e.name, e.type, e.sql_type, e.limit, e.default, e.scale, e.precision, e.primary, e.null]
+      },{
+        :class   => Hirb::Helpers::AutoTable,
+        :headers => %w<name type sql_type limit default scale precision primary null>,
+      }
+      true
+    end
+
+    def counts
+      Hirb::Console.render_output ActiveRecord::Base.connection.tables.map{|e|
+        [e, ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{e}")]
+      },{
+        :class   => Hirb::Helpers::AutoTable,
+        :headers => %w<table count>,
+      }
+      true
+    end
+
+    # ...
+  end
+  def db; DatabaseHelpers; end
+
+  # # #
+  # temp patches
+
+  # hirb vs irb vs ripl
+  # =begin
+  # class << Hirb::View
+  #   def enable_output_method
+  #     if defined?(Ripl) && Ripl.instance_variable_get(:@shell)
+  #       @output_method = true
+  #       require 'ripl/hirb'
+  #     elsif defined? IRB
+  #       @output_method = true
+  #       ::IRB::Irb.class_eval do
+  #         alias_method :non_hirb_view_output, :output_value
+  #         def output_value #:nodoc:
+  #           Hirb::View.view_or_page_output(@context.last_value) || non_hirb_view_output
+  #         end
+  #       end
+  #     end
+  #   end
+  # end
+  # #Hirb::View.disable
+  # #Hirb::View.enable
+  # =end
+
 end
 
 # get a specific route via index or name
@@ -78,7 +142,12 @@ end
 
 # access to routeset for easy recognize / generate
 def r 
-  ActionController::Routing::Routes
+  Rails.application.reload_routes!
+  all_routes = Rails.application.routes.routes
+
+  require 'rails/application/route_inspector'
+  inspector = Rails::Application::RouteInspector.new
+  puts inspector.format(all_routes, ENV['CONTROLLER']).join "\n"
 end
 
 # # #
@@ -164,45 +233,8 @@ Dir.glob( File.join(Dir.pwd, *%w<app models ** *.rb>) ).map { |file_name|
 # end
 # Url.first.console_update
 # see https://github.com/cldwalker/console_update
-require 'console_update'
+# require 'console_update'
 # ConsoleUpdate.editor = 'vim' # not necessary if env var $EDITOR is set
-
-# # #
-# misc db helpers (requires hirb)
-module DatabaseHelpers
-  extend self
-
-  def tables
-    Hirb::Console.render_output ActiveRecord::Base.connection.tables.map{|e|[e]},{
-      :class   => Hirb::Helpers::AutoTable,
-      :headers => %w<tables>,
-    }
-    true
-  end
-
-  def table(which)
-    Hirb::Console.render_output ActiveRecord::Base.connection.columns(which).map{ |e|
-      [e.name, e.type, e.sql_type, e.limit, e.default, e.scale, e.precision, e.primary, e.null]
-    },{
-      :class   => Hirb::Helpers::AutoTable,
-      :headers => %w<name type sql_type limit default scale precision primary null>,
-    }
-    true
-  end
-
-  def counts
-    Hirb::Console.render_output ActiveRecord::Base.connection.tables.map{|e|
-      [e, ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{e}")]
-    },{
-      :class   => Hirb::Helpers::AutoTable,
-      :headers => %w<table count>,
-    }
-    true
-  end
-
-  # ...
-end
-def db; DatabaseHelpers; end
 
 # # # 
 # gems & plugin initializers
@@ -215,31 +247,6 @@ end
 
 # ...
 
-
-# # #
-# temp patches
-
-# hirb vs irb vs ripl
-=begin
-class << Hirb::View
-  def enable_output_method
-    if defined?(Ripl) && Ripl.instance_variable_get(:@shell)
-      @output_method = true
-      require 'ripl/hirb'
-    elsif defined? IRB
-      @output_method = true
-      ::IRB::Irb.class_eval do
-        alias_method :non_hirb_view_output, :output_value
-        def output_value #:nodoc:
-          Hirb::View.view_or_page_output(@context.last_value) || non_hirb_view_output
-        end
-      end
-    end
-  end
-end
-#Hirb::View.disable
-#Hirb::View.enable
-=end
 
 # # #
 end # if Rails.application
