@@ -13,3 +13,9 @@ h.rb
 .ruby-version
 .bundle
 run_tests.sh
+.sass-cache
+.pygments-cache
+.#*
+exe
+doit
+*.trace
