@@ -26,6 +26,7 @@ alias gd="git diff"
 alias gbl="git blame"
 alias gps="git push"
 alias gpl="git pull"
+alias git=hub
 
 # TMUX
 alias ta="tmux attach"
