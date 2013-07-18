@@ -19,3 +19,4 @@ run_tests.sh
 exe
 doit
 *.trace
+.console_history
