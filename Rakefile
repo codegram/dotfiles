@@ -5,7 +5,7 @@ desc "install the dot files into user's home directory"
 task :install do
   replace_all = false
   Dir['*'].each do |file|
-    next if %w[Rakefile README.rdoc Readme.rdoc LICENSE irssi zsh zshrc].include? file
+    next if %w[Rakefile README.rdoc Readme.rdoc LICENSE zsh zshrc].include? file
 
     if File.exist?(File.join(ENV['HOME'], ".#{file.sub('.erb', '')}"))
       if File.identical? file, File.join(ENV['HOME'], ".#{file.sub('.erb', '')}")
@@ -32,8 +32,6 @@ task :install do
   end
 
   system('cat zshrc >> ~/.zshrc')
-
-  configure_irssi
 end
 
 def replace_file(file)
@@ -51,21 +49,4 @@ def link_file(file)
     puts "linking ~/.#{file}"
     system %Q{ln -s "$PWD/#{file}" "$HOME/.#{file}"}
   end
-end
-
-def configure_irssi
-  system('rm -fR ~/.irssi')
-  system('mkdir -p ~/.irssi')
-
-  # Link config file
-  puts "generating ~/irssi/.config"
-  File.open(File.join(ENV['HOME'], ".irssi/config"), 'w') do |new_file|
-    new_file.write ERB.new(File.read("irssi/config.erb")).result(binding)
-  end
-  puts "copying IRSSI themes..."
-  system("cp irssi/*.theme ~/.irssi")
-
-  puts "copying IRSSI plugins..."
-  system("mkdir -p ~/.irssi/")
-  system("cp -r irssi/scripts ~/.irssi")
 end

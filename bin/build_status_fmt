@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+require 'json'
+
+class String
+  def colorize(color_code)
+    "\e[#{color_code}m#{self}\e[0m"
+  end
+
+  def red
+    colorize(31)
+  end
+
+  def green
+    colorize(32)
+  end
+
+  def yellow
+    colorize(33)
+  end
+end
+
+if __FILE__ == $0
+  results = JSON.parse(ARGF.read.gsub("=>", ":").gsub(":nil", ":\"\""))
+
+  results.values.fetch(0, []).each do |job, status|
+    status = status && status.size > 0 ? status : "UNKNOWN"
+    color = if status == "SUCCESS"
+              :green
+            elsif status == "FAILURE"
+              :red
+            else
+              :yellow
+            end
+    puts "#{job} => #{status.public_send(color)}"
+  end
+end

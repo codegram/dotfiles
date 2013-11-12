@@ -17,6 +17,12 @@ These dotfiles require this file:
 
 Here you can add your own mapping without risking to lose them when updating the repo :)
 
+== Emacs
+
+If you want to use emacs, you'll have to install Cask and pallet:
+
+https://github.com/rdallasgray/pallet
+
 == Tmux
 
 Go to your project directory and type this:

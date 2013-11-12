@@ -4,6 +4,7 @@
 .*.swp
 .rbx
 tags
+TAGS
 *.pdf
 .powenv
 .powrc
@@ -20,3 +21,4 @@ exe
 doit
 *.trace
 .console_history
+*.dSYM

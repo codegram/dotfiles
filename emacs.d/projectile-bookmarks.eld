@@ -1,0 +1,1 @@
+("~/Code/wimdu/wimdu/" "~/.dotfiles/")

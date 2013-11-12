@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+require 'open-uri'
+
+abort("Usage: pgpkey [my.friend@gmail.com|emails.txt]") unless ARGV.first
+
+emails = if File.exist?(ARGV.first)
+  File.readlines(ARGV.first).map(&:chomp)
+elsif ARGV.first =~ /@/
+  [ARGV.first]
+end
+
+emails.each do |email|
+  begin
+    lines = open("http://pgp.mit.edu:11371/pks/lookup?search=#{URI.encode(email)}&op=index").readlines
+
+    p lines
+    id = lines.reject { |line|
+      line =~ /REVOKED/
+     }.select { |line|
+      line =~ /pks\/lookup/
+     }.each { |l|
+       p l
+     }.first.scan(/([A-Z0-9]+)<\/a>/).flatten.first
+
+    puts "Found key #{id} for #{ARGV.first}."
+
+    `gpg --recv-keys #{id}`
+  rescue
+    puts "Didn't find any key for #{ARGV.first}."
+  end
+end
