@@ -22,3 +22,4 @@ doit
 *.trace
 .console_history
 *.dSYM
+vendor/bundle

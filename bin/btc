@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+blockchain = 0
+wallet = 0
+kraken = 2.612340
+cash = 0
+
+total = wallet + blockchain + kraken
+
+eur_rate = `curl --silent http://data.mtgox.com/api/2/BTCEUR/money/ticker_fast | jq '.data .last_local .value | tonumber'`.to_i
+
+invested = 150 + 170 + 50 + 430
+spent = 220 + 30 + 15
+
+total_value = (total * eur_rate) + cash
+
+puts "BTC: #{total}. Rate: #{eur_rate} EUR. Total value: #{total_value} (from which #{cash} EUR is cash), invested #{invested} (but after spending #{spent}, it would be #{invested - spent}), profit: #{total_value - invested}, profit after spending: #{total_value - invested + spent}"

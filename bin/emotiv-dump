@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+require 'pg'
+require 'csv'
+
+FIELDS = %w(af3 af3_quality af4 af4_quality f3 f3_quality f4 f4_quality f7 f7_quality f8 f8_quality fc5 fc5_quality fc6 fc6_quality o1 o1_quality o2 o2_quality p7 p7_quality p8 p8_quality t7 t7_quality t8 t8_quality timestamp)
+
+def banner
+  abort "Usage: #{$PROGRAM_NAME} session_name output_file.csv"
+end
+
+session = ARGV[0] || banner
+output = ARGV[1] || banner
+
+conn = PG.connect( dbname: 'zoku' )
+result = conn.exec(<<-QUERY)
+  SELECT emotivdatum.* FROM emotivdatum
+    INNER JOIN emotivsession ON emotivdatum.session_id = emotivsession.id AND emotivsession.name = '#{session}';
+QUERY
+
+CSV.open(output, "wb") do |csv|
+  csv << FIELDS
+  result.each do |row|
+    csv << row.values_at(*FIELDS)
+  end
+  csv
+end
