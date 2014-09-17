@@ -21,13 +21,17 @@ Here you can add your own mapping without risking to lose them when updating the
 
 If you want to use emacs, you'll have to install Cask and pallet:
 
+    brew install cask
+
+And now go to:
+
 https://github.com/rdallasgray/pallet
 
 == Tmux
 
 Go to your project directory and type this:
 
-  $ t
+  $ tmux
 
 Keys to move around tmux:
 

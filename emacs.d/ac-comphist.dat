@@ -1,6 +1,6 @@
-((("linum-mode" .
-   [1 0 0 0 0 0 0 0 0 0])
+((("exit-splash-screen" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
   ("line-number-mode" .
    [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("exit-splash-screen" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])))
+  ("linum-mode" .
+   [1 0 0 0 0 0 0 0 0 0])))

@@ -1,4 +1,4 @@
-(require 'cask "~/.cask/cask.el")
+(require 'cask "/usr/local/Cellar/cask/0.7.1/share/emacs/site-lisp/cask.el")
 (cask-initialize)
 (require 'pallet)
 (add-to-list 'load-path "~/.emacs.d/custom")
