@@ -23,3 +23,4 @@ doit
 .console_history
 *.dSYM
 vendor/bundle
+dump.rdb
