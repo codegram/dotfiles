@@ -13,6 +13,10 @@ dns_zone_transfer() {
   dig @$(host $1 | grep '[0-9]' | awk '{print $4}') $1 -t AXFR
 }
 
+ip() {
+    ifconfig en1 | grep '192' | awk '{print $2}'
+}
+
 external_ip() {
   curl -s http://checkip.dyndns.org | sed 's/[a-zA-Z/<> :]//g'
 }
