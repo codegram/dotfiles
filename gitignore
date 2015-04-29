@@ -5,7 +5,6 @@
 .rbx
 tags
 TAGS
-*.pdf
 .powenv
 .powrc
 .rvmrc.local
